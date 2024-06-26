@@ -1,0 +1,74 @@
+#pragma METAINFO("naughtykitties", 1, 0, "<author_name>")
+/*
+This script is for Naughty Kitties and was built for Titan Two.
+
+The purpose is to farm coins and fish while AFK to easily level up cats/ships.
+______________________________
+           Coins        Fish  |
+------------------------------
+Level 1:     +          +++   |
+Level 2:     ++         ++    |
+Level 3:     +++        +     |
+------------------------------
+
+Recommend playing the game and leveling up a little before you begin farming.
+
+Works well with:
+Ship: Pirate Ship.
+Cats: The three starter cats, the lazer cat, and another repair cat.
+
+To use: Start a level and press Left Stick to start script, it will spam A and Y.
+If you plan on playing Level 2, there is some code below that is commented out that you can re-add. It spams RB and LB to shake off debris.
+
+To stop: Press Right Stick.
+*/
+
+int i;
+main {
+	if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(spammer);
+		//combo_run(leveltwo);
+	}
+	if(i==0)
+	{
+		combo_stop(spammer);
+		//combo_stop(leveltwo);
+	}
+}
+
+combo spammer{  //Spams A && Y
+	set_val(BUTTON_16, 100);  //A
+	wait(223);
+	set_val(BUTTON_16, 0);    //A
+	wait(223);
+	set_val(BUTTON_16, 100);  //A
+	wait(223);
+	set_val(BUTTON_16, 0);    //A
+	wait(223);
+	set_val(BUTTON_14, 100);  //Y
+	wait(223);
+	set_val(BUTTON_14, 0);    //Y
+	wait(500);
+}
+/*
+combo leveltwo{  //Spams RB and LB for Level 2
+	set_val(BUTTON_7, 100);  //LB
+	wait(223);
+	set_val(BUTTON_7, 0);    //LB 
+	wait(223);
+	set_val(BUTTON_4, 100);  //RB
+	wait(223);
+	set_val(BUTTON_4, 0);    //RB
+	wait(223);
+	
+}*/
+
