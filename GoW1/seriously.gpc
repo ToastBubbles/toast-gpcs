@@ -1,0 +1,236 @@
+#pragma METAINFO("seriously", 1, 0, "ToastBubbles")
+
+int counter = 0;
+int running = 0; // 0 means not started, 1 means running
+int toggle = 0;
+int combo_running = 0;
+
+main {
+    if (get_val(BUTTON_7)) {  // LB
+        if (running == 0) {
+            running = 1;
+            counter = 0;
+            combo_running = 0;
+        }
+    }
+
+    if (running == 1 && combo_running == 0) {
+        if (counter < 19) {
+            if (toggle == 0) {
+                combo_running = 1;
+                combo_run(leftRoute);
+                toggle = 1;
+            } else {
+                combo_running = 1;
+                combo_run(rightRoute);
+                toggle = 0;
+            }
+            counter++;
+        } else {
+            running = 0;
+        }
+    }
+}
+combo leftRoute{
+		wait(400);
+		set_val(BUTTON_16, 100);  //A
+		wait(5300);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, -100);  //LSX
+		wait(3700);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(3500);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, -100);  //LSX
+		wait(1000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(STICK_2_Y, -100);  //LSY
+		wait(1600);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(1500);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(3000);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(4600);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(5900);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, -100);  //LSX
+		wait(550);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);   
+		wait(2800);
+		set_val(STICK_2_Y, 100);  //LSY
+		wait(1400);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(2500);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);    
+		wait(2800);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(1200);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(STICK_2_Y, -100);  //YSX
+		wait(400);
+		set_val(STICK_2_Y, 0);    //YSX
+		wait(200);
+		
+		//comment out the following lines to switch to curb stops
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);    
+		wait(500);
+		
+		//Remove comment slashes to switch to curb stops
+		//set_val(BUTTON_12, 100);  //Shotgun
+		//wait(200);
+		//set_val(BUTTON_12, 0);    
+		//wait(1800);
+		//set_val(BUTTON_15, 100);  //WHACK
+		//wait(200);
+		//set_val(BUTTON_15, 0);   
+		//wait(2000);
+		//set_val(BUTTON_15, 100);  //WHACK
+		//wait(200);
+		//set_val(BUTTON_15, 0);    
+		//wait(1200);
+		//set_val(STICK_2_Y, -100);  //YSX
+		//wait(400);
+		//set_val(STICK_2_Y, 0);    //YSX
+		//wait(200);
+		//set_val(BUTTON_17, 100);  //EXECUTE
+		//wait(2200);
+		//set_val(BUTTON_17, 0);   
+		
+		wait(18000);
+		combo_running = 0;
+}
+
+combo rightRoute{
+		wait(400);
+		set_val(BUTTON_16, 100);  //A
+		wait(2300);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(700);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(3500);
+		set_val(BUTTON_16, 0);    //A
+		wait(400);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(6000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(3200);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(1000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(STICK_2_Y, -100);  //LSY
+		wait(1600);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(200);
+		set_val(STICK_2_X, -100);  //LSX
+		wait(1000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(3000);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, -100);  //LSX
+		wait(4000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_16, 100);  //A
+		wait(6200);
+		set_val(BUTTON_16, 0);    //A
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(300);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);    
+		wait(2800);
+		set_val(STICK_2_Y, 100);  //LSY
+		wait(1800);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(950);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);    
+		wait(2800);
+		set_val(STICK_2_X, 100);  //LSX
+		wait(1200);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(STICK_2_Y, -100);  //YSX
+		wait(400);
+		set_val(STICK_2_Y, 0);    //YSX
+		wait(200);
+		
+		//comment out the following lines to switch to curb stops
+		set_val(BUTTON_15, 100);  //CHAINSAW
+		wait(2000);
+		set_val(BUTTON_15, 0);    
+		wait(500);
+		
+		//Remove comment slashes to switch to curb stops
+		//set_val(BUTTON_12, 100);  //Shotgun
+		//wait(200);
+		//set_val(BUTTON_12, 0);    
+		//wait(1800);
+		//set_val(BUTTON_15, 100);  //WHACK
+		//wait(200);
+		//set_val(BUTTON_15, 0);   
+		//wait(2000);
+		//set_val(BUTTON_15, 100);  //WHACK
+		//wait(200);
+		//set_val(BUTTON_15, 0);    
+		//wait(1200);
+		//set_val(STICK_2_Y, -100);  //YSX
+		//wait(400);
+		//set_val(STICK_2_Y, 0);    //YSX
+		//wait(200);
+		//set_val(BUTTON_17, 100);  //EXECUTE
+		//wait(2200);
+		//set_val(BUTTON_17, 0); 
+		
+		wait(18000);
+		combo_running = 0;
+}
