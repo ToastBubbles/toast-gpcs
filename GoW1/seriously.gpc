@@ -25,6 +25,7 @@ main {
             running = 1;
             counter = 0;
             combo_running = 0;
+			toggle = 0;
         }
     }
 
