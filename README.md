@@ -1,1 +1,1 @@
-GPC Files
+GPC Files for Titan Two, specifically for Xbox

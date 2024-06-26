@@ -1,0 +1,91 @@
+#pragma METAINFO("halo wars", 1, 0, "ToastBubbles")
+
+/*
+For boosting Running the Show achievement, this script continuously builds buildings as they are destroyed by another player
+*/
+
+int i;
+main {
+if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(star);
+	}
+}
+combo star{
+	set_val(BUTTON_16, 100);//A
+	wait(100);
+	set_val(BUTTON_16, 0);
+	
+	wait(100);
+	
+	set_val(STICK_2_X, -100);//Left
+	wait(200);
+	set_val(BUTTON_16, 100);//A
+	wait(100);
+	set_val(BUTTON_16, 0);
+	set_val(STICK_2_X, 0);
+	
+	wait(420);
+	
+	set_val(STICK_2_Y, -100);//Up
+	wait(410);
+	set_val(STICK_2_Y, 0);
+	
+	wait(420);
+	
+	set_val(BUTTON_16, 100);//A        //Start Menu
+	wait(100);
+	set_val(BUTTON_16, 0);
+	
+	wait(100);
+	
+	set_val(STICK_2_X, -100);//Left
+	wait(200);
+	set_val(BUTTON_16, 100);//A
+	wait(100);
+	set_val(BUTTON_16, 0);
+	set_val(STICK_2_X, 0);            //end menu
+	
+	wait(420);
+	
+	set_val(STICK_2_Y, -100);//Up
+	wait(410);
+	set_val(STICK_2_Y, 0);
+	
+	wait(420);
+	
+	set_val(BUTTON_16, 100);//A        //Start Menu
+	wait(100);
+	set_val(BUTTON_16, 0);
+	
+	wait(100);
+	
+	set_val(STICK_2_X, -100);//Left
+	wait(200);
+	set_val(BUTTON_16, 100);//A
+	wait(100);
+	set_val(BUTTON_16, 0);
+	set_val(STICK_2_X, 0);            //end menu
+	
+	wait(420);
+	
+	set_val(STICK_2_Y, 100);//Down
+	wait(410);
+	set_val(STICK_2_Y, 0);
+	
+	wait(420);
+	
+	set_val(STICK_2_Y, 100);//Down
+	wait(410);
+	set_val(STICK_2_Y, 0);
+	
+	wait(420);
+}

@@ -1,0 +1,312 @@
+// GPC Online Library
+// geometry_wars_slo-mo.gpc
+
+/* =====================================================================
+* GEOMETRY WARS SLO-MO
+* 
+*  Authors: BuckSatan
+*
+*  Version: 1.01
+*
+*  Overview:
+*    Enables Smart Turbo to Slow Down Geometry Wars
+*    Lazy Shooting fires in direction of travel when RS not used
+*
+*  Details:
+*    Press BACK to toggle Slo-Mo on/off.
+*
+*    Use DPAD to adjust Slo-Mo (turbo) timing.  UP/DOWN changes the 
+*    duration of UNPAUSED delay.  UP reduces the delay (faster turbo), 
+*    while DOWN increased the delay (slower turbo).  LEFT/RIGHT changes 
+*    the duration of the PAUSED delay.  RIGHT reduces the delay (faster 
+*    turbo), while LEFT increases the delay (slower turbo).  The best 
+*    settings seem to be a very short UNPAUSED delay (hit UP several 
+*    times), then use LEFT/RIGHT to slow the gameplay down to something 
+*    that seems comfortable.
+*
+*    Press Y to toggle Lazy Shooting off/on (it is on by default).  You 
+*    can still use RS to aim and shoot wherever you wish, but if you 
+*    let go of RS then Lazy Shooting will assign the LS values to RS so 
+*    you're always shooting ahead.
+*
+*  Bugs and Limitations:
+*    This was written specifically for Geometry Wars and may not work
+*    with other dual-stick shooter games.
+* ===================================================================== */
+
+
+//
+// DEFINES
+// ====================================================================
+
+// GENERAL SCRIPT BEHAVIOR / CONTROL
+// ----------------------------------
+
+// General Timing
+define T_HOLD_INPUT     = 40;               // Time to Hold Inputs
+
+
+// Turbo Timings
+define T_PAUSE_MIN      = 20;               // Minimum Pause Delay (Fastest)
+define T_PAUSE_MAX      = 500;              // Maximum Pause Delay (Slowest)
+define T_PAUSE_DEFAULT  = 20;               // Default Pause Delay
+define T_PLAY_MIN       = 20;               // Minimum Unpaused Timing (Fastest)
+define T_PLAY_MAX       = 5000;             // Maximum Unpaused Timing (Slowest)
+define T_PLAY_DEFAULT   = 25;               // Default Unpaused Timing
+
+
+
+// Turbo Adjustments
+define T_ADJUST_FINE    = 10;               // Fine Adjustments to Turbo Delay
+define T_ADJUST_COARSE  = 100;              // Coarse Adjustments to Turbo Delay
+
+// Traces
+define TR_TURBO_CNT     = TRACE_1;
+define TR_BTN_CONTEXT   = TRACE_2;
+define TR_BTN_RATE      = TRACE_3;
+define TR_BTN_STATE     = TRACE_4;
+define TR_BTN_TIME      = TRACE_5;
+
+//
+// DATA SEGMENT
+// ====================================================================
+// (none required)
+
+
+//
+// REMAPPINGS
+// ====================================================================
+// (none required)
+
+
+//
+// VARIABLES
+// ====================================================================
+
+// Turbo Control Parameters
+int bSloMo  = FALSE;                        // SlowMo Enabled
+int bLazy   = TRUE;                         // Lazy Shooting Enabled
+int bPaused = FALSE;                        // Currently Paused
+
+// Timing
+int t_pause;                                // Timing for Delay While Paused
+int t_play;                                 // Timing for Delay While Not Paused
+
+
+//
+// INITIALIZATION
+// ====================================================================
+init {
+  t_pause   = T_PAUSE_DEFAULT;
+  t_play    = T_PLAY_DEFAULT;
+}
+
+
+//
+// MAIN
+// ====================================================================
+main {
+
+  // ------------------------------
+  // Toggle Slow-Mo Mode
+  // ------------------------------
+  if(event_press(XB360_BACK))bSloMo=!bSloMo;
+
+  // ------------------------------
+  // Toggle Slow-Mo Mode
+  // ------------------------------
+  if(event_press(XB360_Y))bLazy=!bLazy;
+
+
+  // ------------------------------
+  // Run Smart Slow-Mo when Enabled
+  // ------------------------------
+  if (bSloMo) {
+
+    // Run a cycle of Slow Mo
+    combo_run(do_slow_mo);
+
+
+  // ------------------------------
+  // Reset LEDs When No Slo-Mo
+  // ------------------------------
+  } else {
+    reset_leds();
+  }
+
+
+  // ------------------------------
+  // Lazy Shooting
+  // ------------------------------
+  if ((bLazy) && !(bPaused) && (abs(get_val(XB360_RX)) < 15) && (abs(get_val(XB360_RY)) < 15)) {
+    combo_run(shoot_forward);
+  }
+
+
+  // ------------------------------
+  // Adjust Turbo Timings
+  // ------------------------------
+
+  // Increase Pause Duraction (Slower Turbo)
+  if(event_press(XB360_LEFT)) {
+    combo_run(increase_pause);
+  }
+
+  // Decrease Pause Duraction (Faster Turbo)
+  if(event_press(XB360_RIGHT)) {
+    combo_run(decrease_pause);
+  }
+
+  // Increase Play Duraction (Slower Turbo)
+  if(event_press(XB360_DOWN)) {
+    combo_run(increase_play);
+  }
+
+  // Decrease Play Duraction (Faster Turbo)
+  if(event_press(XB360_UP)) {
+    combo_run(decrease_play);
+  }
+} // END MAIN
+
+
+//
+// COMBOS
+// ====================================================================
+
+
+// --------------------------------------------------------------------
+// Combo:  do_slow_mo
+// --------------------------------------------------------------------
+// Smart Turbo of Start button for Slo-Mo effect.  Disable menu nav 
+// while paused to prevent getting stuck in menus.
+// --------------------------------------------------------------------
+combo do_slow_mo {
+
+  // ------------------------------
+  // Paused...
+  bPaused = TRUE;
+
+  // Hit Start (Pause)
+  set_val(XB360_START,100);
+
+  // LEDs Off
+  set_led(LED_1, 0);
+  set_led(LED_2, 0);
+  set_led(LED_3, 0);
+  set_led(LED_4, 0);
+
+  // START HELD
+  wait(T_HOLD_INPUT);
+
+  // Release Start (Paused)
+  set_val(XB360_START,0);
+
+  // Pause LED On
+  set_led(LED_4, 1);
+
+  // START RELEASED
+  wait(t_pause);
+
+  // ------------------------------
+
+  // Hit B (Unpause)
+  set_val(XB360_B,100);
+
+  // LEDs Off
+  set_led(LED_1, 0);
+  set_led(LED_2, 0);
+  set_led(LED_3, 0);
+  set_led(LED_4, 0);
+
+  // START HELD
+  wait(T_HOLD_INPUT);
+
+  // Unpaused...
+  bPaused = FALSE;
+
+  // Release B (Not Paused)
+  set_val(XB360_B,0);
+
+  // Play LED On
+  set_led(LED_2, 1);
+
+  // START RELEASED
+  wait(t_play);
+
+} // END do_slow_mo
+
+
+// --------------------------------------------------------------------
+// Combo:  shoot_forward
+// --------------------------------------------------------------------
+// Copy LS values to RS (Shoot in direction of Travel)
+// --------------------------------------------------------------------
+combo shoot_forward {
+  // Aim in direction of Travel
+  set_val(XB360_RX,get_val(XB360_LX));
+  set_val(XB360_RY,get_val(XB360_LY));
+
+  // Shoot...
+  wait(t_play);
+} // END shoot_forward
+
+
+// --------------------------------------------------------------------
+// Combo:  increase_pause
+// --------------------------------------------------------------------
+// Increase Duration of Pause Timer
+// --------------------------------------------------------------------
+combo increase_pause {
+  if ((t_pause + T_ADJUST_FINE) > T_PAUSE_MAX) {
+    t_pause = T_PAUSE_MAX;
+  } else {
+    t_pause = t_pause + T_ADJUST_FINE;
+  }
+} // END increase_pause
+
+
+// --------------------------------------------------------------------
+// Combo:  decrease_pause
+// --------------------------------------------------------------------
+// Decrease Duration of Pause Timer
+// --------------------------------------------------------------------
+combo decrease_pause {
+  if ((t_pause - T_ADJUST_FINE) < T_PAUSE_MIN) {
+    t_pause = T_PAUSE_MIN;
+  } else {
+    t_pause = t_pause - T_ADJUST_FINE;
+  }
+} // END decrease_pause
+
+
+// --------------------------------------------------------------------
+// Combo:  increase_play
+// --------------------------------------------------------------------
+// Increase Duration of Pause Timer
+// --------------------------------------------------------------------
+combo increase_play {
+  if ((t_play + T_ADJUST_FINE) > T_PLAY_MAX) {
+    t_play = T_PLAY_MAX;
+  } else {
+    t_play = t_play + T_ADJUST_FINE;
+  }
+} // END increase_play
+
+
+// --------------------------------------------------------------------
+// Combo:  decrease_play
+// --------------------------------------------------------------------
+// Decrease Duration of Pause Timer
+// --------------------------------------------------------------------
+combo decrease_play {
+  if ((t_play - T_ADJUST_FINE) < T_PLAY_MIN) {
+    t_play = T_PLAY_MIN;
+  } else {
+    t_play = t_play - T_ADJUST_FINE;
+  }
+} // END decrease_play
+
+//
+// FUNCTIONS
+// ====================================================================
+// (none required)

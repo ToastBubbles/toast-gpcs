@@ -1,0 +1,36 @@
+#pragma METAINFO("idle", 1, 0, "TB")
+
+int i;
+main {
+if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(start);
+	}
+}
+combo start{
+
+	
+	set_val(STICK_2_Y, -100);//Up
+	wait(200);
+	set_val(STICK_2_Y, 0);
+	
+	wait(4200);
+	
+	set_val(STICK_2_Y, 100);//Up
+	wait(200);
+	set_val(STICK_2_Y, 0);
+	
+	wait(4200);
+	
+
+}
+
+

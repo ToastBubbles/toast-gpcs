@@ -1,0 +1,25 @@
+#pragma METAINFO("spamX", 1, 0, "TB")
+
+int i;
+main {
+if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(start);
+	}
+}
+combo start{
+	set_val(BUTTON_17, 100);//X
+	wait(50);
+	set_val(BUTTON_17, 0);
+	wait(50);
+}
+
+

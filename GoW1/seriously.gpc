@@ -1,5 +1,19 @@
 #pragma METAINFO("seriously", 1, 0, "ToastBubbles")
 
+/*
+This script is for GoW 1 and was built for Titan Two.
+
+Additional info:
+https://www.trueachievements.com/forum/viewthread.aspx?tid=1558010
+
+Setup:
+Ranked Warzone on War Machine 6v6, player who is running the script must be the first person to join Cog on the team select screen.
+
+Start: press LB to start
+
+After 19 rounds, you need to manually set the lobby back up.
+*/
+
 int counter = 0;
 int running = 0; // 0 means not started, 1 means running
 int toggle = 0;
