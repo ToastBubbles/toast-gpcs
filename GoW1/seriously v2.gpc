@@ -209,7 +209,7 @@ combo rightRoute{
 		set_val(STICK_2_Y, 0);    //LSY
 		wait(50);
 		set_val(STICK_2_X, 100);  //LSX right
-		wait(950);
+		wait(975);
 		set_val(STICK_2_X, 0);    //LSX
 		wait(50);
 		set_val(BUTTON_5, 100);  //SHOOT 2
@@ -221,7 +221,7 @@ combo rightRoute{
 		set_val(STICK_1_Y, 0);    //RSY
 		wait(50);
 		set_val(STICK_2_X, 100);  //LSX right
-		wait(1200);
+		wait(1175);
 		set_val(STICK_2_X, 0);    //LSX
 		wait(200);
 		set_val(BUTTON_5, 100);  //SHOOT 3
