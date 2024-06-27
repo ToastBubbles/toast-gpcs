@@ -1,0 +1,232 @@
+#pragma METAINFO("seriously v2", 1, 0, "ToastBubbles")
+
+
+/*
+This script is for GoW 1 and was built for Titan Two.
+
+Additional info:
+https://www.trueachievements.com/forum/viewthread.aspx?tid=1558010
+
+Setup:
+Ranked Warzone on War Machine 6v6, player who is running the script must be the first person to join Cog on the team select screen.
+
+Start: press LB to start
+
+(use RB to start if you messed up the first round and need to start the script with the second spawn point)
+
+After 19 rounds, you need to manually set the lobby back up.
+*/
+
+int counter = 0;
+int running = 0; // 0 means not started, 1 means running
+int toggle = 0;
+int combo_running = 0;
+
+main {
+    if (get_val(BUTTON_7)) {  // LB
+        if (running == 0) {
+            running = 1;
+            counter = 0;
+            combo_running = 0;
+			toggle = 0;
+        }
+    }
+	if (get_val(BUTTON_4)) {  // RB
+        if (running == 0) {
+            running = 1;
+            counter = 1; // offset
+            combo_running = 0;
+			toggle = 1;
+        }
+    }
+
+    if (running == 1 && combo_running == 0) {
+        if (counter < 19) {
+            if (toggle == 0) {
+                combo_running = 1;
+                combo_run(leftRoute);
+                toggle = 1;
+            } else {
+                combo_running = 1;
+                combo_run(rightRoute);
+                toggle = 0;
+            }
+            counter++;
+        } else {
+            running = 0;
+        }
+    }
+}
+combo leftRoute{
+		wait(300);
+		set_val(BUTTON_16, 100);  //A Foward
+		wait(5300);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(BUTTON_12, 100);  //select shotgun
+		wait(300);
+		set_val(BUTTON_12, 0);    
+		wait(300);
+		set_val(STICK_2_X, -100);  //LSX Left
+		wait(3700);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A Foward
+		wait(3500);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, -100);  //LSX Left
+		wait(600);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(STICK_2_Y, -100);  //LSY foward slow
+		wait(1600);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(1100);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A foward
+		wait(3000);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(4600);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A foward (into enemy spawn)
+		wait(5900);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, -100);  //LSX left
+		wait(620);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(STICK_1_Y, 100);  //RSY look down
+		wait(200);
+		set_val(STICK_1_Y, 0);    //RSY
+		wait(50);
+		set_val(BUTTON_5, 100);  //SHOOT 1
+		wait(1400);
+		set_val(BUTTON_5, 0);   
+		wait(50);
+		set_val(STICK_1_Y, 100);  //RSY look down
+		wait(200);
+		set_val(STICK_1_Y, 0);    //RSY
+		wait(50);
+		set_val(STICK_2_Y, 100);  //LSY back
+		wait(1700);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(200);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(2200);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_5, 100);  //SHOOT 2
+		wait(1400);
+		set_val(BUTTON_5, 0);    
+		wait(50);
+		set_val(STICK_1_Y, 100);  //RSY look down
+		wait(200);
+		set_val(STICK_1_Y, 0);    //RSY
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(1200);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_5, 100);  //SHOOT 3
+		wait(1400);
+		set_val(BUTTON_5, 0);     
+		wait(16200);
+		combo_running = 0;
+}
+
+combo rightRoute{
+		wait(200);
+		set_val(BUTTON_16, 100);  //A Foward
+		wait(2300);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(BUTTON_12, 100);  //select shotgun
+		wait(300);
+		set_val(BUTTON_12, 0);    
+		wait(300);
+		set_val(STICK_2_X, 100);  //LSX Right
+		wait(700);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A Foward
+		wait(3500);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX Right
+		wait(6000);
+		set_val(STICK_2_X, 0);    //LSX 
+		wait(50);
+		set_val(BUTTON_16, 100);  //A Foward
+		wait(3200);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX Right
+		wait(1000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(STICK_2_Y, -100);  //LSY Foward slow
+		wait(1600);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(50);
+		set_val(STICK_2_X, -100);  //LSX left
+		wait(1000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A foward
+		wait(3000);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, -100);  //LSX left
+		wait(4000);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_16, 100);  //A foward (into enemy spawn)
+		wait(6200);
+		set_val(BUTTON_16, 0);    //A
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(150);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_5, 100);  //SHOOT 1
+		wait(1400);
+		set_val(BUTTON_5, 0);    
+		wait(50);
+		set_val(STICK_1_Y, 100);  //RSY look down
+		wait(200);
+		set_val(STICK_1_Y, 0);    //RSY
+		wait(50);
+		set_val(STICK_2_Y, 100);  //LSY back
+		wait(1800);
+		set_val(STICK_2_Y, 0);    //LSY
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(900);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(50);
+		set_val(BUTTON_5, 100);  //SHOOT 2
+		wait(1400);
+		set_val(BUTTON_5, 0);    
+		wait(50);
+		set_val(STICK_1_Y, 100);  //RSY look down
+		wait(200);
+		set_val(STICK_1_Y, 0);    //RSY
+		wait(50);
+		set_val(STICK_2_X, 100);  //LSX right
+		wait(1200);
+		set_val(STICK_2_X, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_5, 100);  //SHOOT 3
+		wait(1400);
+		set_val(BUTTON_5, 0);    
+		wait(16200);
+		combo_running = 0;
+}
