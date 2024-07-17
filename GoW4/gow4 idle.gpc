@@ -1,0 +1,32 @@
+#pragma METAINFO("gow4", 1, 0, "ToastBubbles")
+
+
+
+
+int i = 0;
+
+main {
+    if (get_val(BUTTON_7)) {  // LB
+        i = 1;
+    }
+	
+	if(i == 1){
+		combo_run(start);
+	}
+	
+}
+combo start{
+		set_val(BUTTON_12, 100);  //select shotgun
+		wait(300);
+		set_val(BUTTON_12, 0);    
+		wait(300);
+		set_val(STICK_2_Y, -100);  //LSX fw
+		wait(400);
+		set_val(STICK_2_Y, 0);    //LSX
+		wait(200);
+		set_val(BUTTON_5, 100);  //SHOOT 
+		wait(200);
+		set_val(BUTTON_5, 0);     
+		wait(2000);
+}
+

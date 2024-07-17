@@ -1,0 +1,24 @@
+#pragma METAINFO("gowPing", 1, 0, "ToastBubbles")
+
+
+
+
+int i = 0;
+
+main {
+    if (get_val(BUTTON_7)) {  // LB
+        i = 1;
+    }
+	
+	if(i == 1){
+		combo_run(start);
+	}
+	
+}
+combo start{
+		set_val(BUTTON_9, 100);  //select shotgun
+		wait(100);
+		set_val(BUTTON_9, 0);    
+		wait(100);
+		
+}

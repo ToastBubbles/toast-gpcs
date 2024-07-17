@@ -1,0 +1,31 @@
+#pragma METAINFO("gow2KOTH", 1, 0, "TB")
+
+int i;
+main {
+if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(spam);
+	}else{
+		combo_stop(spam);
+	}
+}
+
+
+combo spam{
+		set_val(STICK_2_Y, -100); 
+		wait(1000);
+		set_val(STICK_2_Y, 0);    
+		wait(200);
+		set_val(STICK_2_Y, 100); 
+		wait(1000);
+		set_val(STICK_2_Y, 0);    
+		wait(2000);
+}
