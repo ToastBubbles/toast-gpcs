@@ -1,5 +1,9 @@
 #pragma METAINFO("gow2KOTH", 1, 0, "TB")
 
+//put 5 xp gainers in ring, then have an enemy run this script from right outside the ring, they will move left and right to break/leave the ring.
+
+//Originally this script had the player move foward and backwards, but players move slower backwards, so the script would slowly move foward which is no good
+
 int i;
 main {
 if(get_val(BUTTON_9))  //LS
@@ -12,20 +16,31 @@ if(get_val(BUTTON_9))  //LS
 	}
 	if(i==1)
 	{
-		combo_run(spam);
+		combo_run(spam2);
 	}else{
-		combo_stop(spam);
+		combo_stop(spam2);
 	}
 }
 
 
 combo spam{
 		set_val(STICK_2_Y, -100); 
-		wait(1000);
+		wait(900);
 		set_val(STICK_2_Y, 0);    
 		wait(200);
 		set_val(STICK_2_Y, 100); 
-		wait(1000);
+		wait(1150);
 		set_val(STICK_2_Y, 0);    
-		wait(2000);
+		wait(1000);
+}
+
+combo spam2{
+		set_val(STICK_2_X, -100); 
+		wait(1000);
+		set_val(STICK_2_X, 0);    
+		wait(300);
+		set_val(STICK_2_X, 100); 
+		wait(1000);
+		set_val(STICK_2_X, 0);    
+		wait(1000);
 }
