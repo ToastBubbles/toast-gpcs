@@ -1,0 +1,77 @@
+#pragma METAINFO("splitgate_RTM", 1, 0, "ToastBubbles")
+
+//for details, check the README or go to https://www.trueachievements.com/forum/viewthread.aspx?tid=1568973
+
+
+int i;
+main {
+if(get_val(BUTTON_11))  //down on dpad
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(spam);
+	}else{
+		combo_stop(spam);
+	}
+}
+
+combo spam{
+		//Pause
+		wait(400);
+		set_val(BUTTON_3, 100); //PAUSE
+		wait(300);
+		set_val(BUTTON_5, 0); 
+		wait(300);
+
+		//Navigate pause menu
+		set_val(BUTTON_11, 100); //DPAD DWN
+		wait(300);
+		set_val(BUTTON_11, 0); 
+		wait(200);
+		set_val(BUTTON_11, 100); //DPAD DWN
+		wait(300);
+		set_val(BUTTON_11, 0); 
+		wait(200);
+		set_val(BUTTON_11, 100); //DPAD DWN
+		wait(300);
+		set_val(BUTTON_11, 0); 
+		wait(200);
+		set_val(BUTTON_11, 100); //DPAD DWN
+		wait(300);
+		set_val(BUTTON_11, 0); 
+		wait(200);
+		
+		set_val(BUTTON_16, 100); //A
+		wait(300);
+		set_val(BUTTON_16, 0); 
+		wait(500);
+		set_val(BUTTON_16, 100); //A
+		wait(300);
+		set_val(BUTTON_16, 0); 
+		
+		//loading screen
+		wait(7000);
+		
+		//queue for new match
+		set_val(BUTTON_17, 100); //X
+		wait(300);
+		set_val(BUTTON_17, 0); 
+		wait(700);
+		set_val(BUTTON_16, 100); //A
+		wait(300);
+		set_val(BUTTON_16, 0); 
+		wait(700);
+		set_val(BUTTON_17, 100); //X
+		wait(300);
+		set_val(BUTTON_17, 0); 
+		wait(500);
+
+		//this prevents looping
+		i=0;
+}
