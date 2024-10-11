@@ -48,7 +48,7 @@ combo routineCOG{
 	wait(30000);
 	wait(30000);
 	wait(30000);
-	wait(30000);
+	wait(20000);
 	
 }
 
@@ -66,7 +66,7 @@ combo routineSWARM{
 	wait(30000);
 	wait(30000);
 	wait(30000);
-	wait(12000);//wait ~2 min
+	wait(16000);//wait ~2 min
 	
 }
 
