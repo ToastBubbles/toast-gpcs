@@ -1,0 +1,206 @@
+#pragma METAINFO("GoWUESeriously", 1, 0, "ToastBubbles")
+
+//use on social 2v2 gnashers with all idling players holding the left stick downward slightly so they walk backwards. Each enemy should be adjusted to be slightly left or right depending on their position.
+
+//Make sure the player getting kills is the host of the COG team. Then load into a game, once in press LB to begin the script and adjust accordinginly. If your spawns get inverted, press RB to run the inverted script (inverted means the enemies are spawned in the area that is lit red.
+
+int enabled = 0;
+int flipRounds = 0;
+main {
+	if(get_val(BUTTON_7))  //LB
+	{
+		enabled = 1;
+	}
+	if(get_val(BUTTON_4))  //RB
+	{
+		enabled = 1;
+		flipRounds = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		enabled = 0;
+		flipRounds = 0;
+	}
+	if(enabled==1)
+	{
+		if(flipRounds == 0){
+		combo_run(routineCOG);
+		}else{
+			combo_run(routineSWARM);
+		}
+	}else{
+		combo_stop(routineCOG);
+		combo_stop(routineSWARM);
+	}
+}
+
+
+combo routineCOG{
+	
+	call(route1);
+	call(route2);
+	call(route1);
+	call(route2);
+	call(route1);
+	call(route2); 
+	call(route1);
+	
+	wait(30000);
+	wait(30000);
+	wait(30000);
+	wait(30000);
+	
+}
+
+combo routineSWARM{
+	
+	call(route2);
+	call(route1);
+	call(route2);
+	call(route1);
+	call(route2);
+	call(route1);
+	call(route2); 
+	
+	
+	wait(30000);
+	wait(30000);
+	wait(30000);
+	wait(12000);//wait ~2 min
+	
+}
+
+
+combo route1{
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(5000);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+
+	set_val(STICK_2_X, -100); //LS LEFT
+	wait(1200);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(1400);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+
+	set_val(STICK_2_X, 100); //LS RIGHT
+	wait(1400);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(6000);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+	
+	set_val(STICK_2_X, -100); //LS LEFT
+	wait(560);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(STICK_1_Y, 100); //Look down a tad
+	wait(100);
+	set_val(STICK_1_Y, 0);    
+	wait(50);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(800);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(50);
+	
+	set_val(STICK_2_Y, 100); //LS BACK
+	wait(150);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+	
+	set_val(STICK_2_X, 100); //LS RIGHT
+	wait(3400);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(800);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+		
+	wait(16600);
+}
+
+
+combo route2{
+	////////////////////////ROUND 2
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(4000);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+
+	set_val(STICK_2_X, -100); //LS LEFT
+	wait(1200);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(1400);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+
+	set_val(STICK_2_X, 100); //LS RIGHT
+	wait(1400);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(STICK_2_Y, -100); //LS FOWARD
+	wait(6000);
+	set_val(STICK_2_Y, 0);    
+	wait(50);
+	
+	set_val(STICK_2_X, -100); //LS LEFT
+	wait(300);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(STICK_1_Y, 100); //Look down a tad
+	wait(100);
+	set_val(STICK_1_Y, 0);    
+	wait(50);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(800);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(50);
+	
+	set_val(STICK_2_X, 100); //LS RIGHT
+	wait(3300);
+	set_val(STICK_2_X, 0);    
+	wait(50);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+	wait(50);
+	
+	set_val(BUTTON_5, 100); //RT
+	wait(200);
+	set_val(BUTTON_5, 0);    
+
+		
+	wait(16600);
+}

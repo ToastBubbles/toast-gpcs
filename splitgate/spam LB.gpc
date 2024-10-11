@@ -1,0 +1,28 @@
+#pragma METAINFO("spam LB", 1, 0, "<author_name>")
+
+
+
+int i;
+main {
+if(get_val(BUTTON_9))  //LS
+	{
+		i = 1;
+	}
+	if(get_val(BUTTON_6))  //RS
+	{
+		i = 0;
+	}
+	if(i==1)
+	{
+		combo_run(spam);
+	}else{
+		combo_stop(spam);
+	}
+}
+
+combo spam{
+		set_val(BUTTON_7, 100); //LB
+		wait(1000);
+		set_val(BUTTON_7, 0);    
+		wait(30000);
+}
